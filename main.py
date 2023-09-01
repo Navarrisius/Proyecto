@@ -1,17 +1,23 @@
-import pygame, sys
+import pygame
+from funciones.generar_terreno import generar_terreno
 
 pygame.init()
-
-ANCHO = 1280
-LARGO = 720
-
-size = (ANCHO, LARGO)
-
-screen = pygame.display.set_mode(size)
-
-while True:
+LARGO = 1280
+ANCHO = 720
+screen = pygame.display.set_mode((LARGO, ANCHO))
+clock = pygame.time.Clock()
+running = True
+generar_terreno(screen, LARGO, ANCHO)
+while running:
+    
+    # Cierre del juego
     for event in pygame.event.get():
         print(event)
-        #Cierre del juego
         if event.type == pygame.QUIT:
-            sys.exit()
+            running = False
+    
+    pygame.display.flip()
+    
+    clock.tick(60)  # limits FPS to 60
+
+pygame.quit()
